@@ -20,7 +20,7 @@
   .print-sheet{padding:0;color:#26312c!important}
   .paper-head{height:42mm;border:0;border-radius:3mm;overflow:hidden;display:grid;grid-template-columns:38% 62%;background:#f4f8f2;box-shadow:inset 0 0 0 1px #d9e2d6}
   .ls-logo{padding:7mm 7mm 4mm;background:#fff;border-left:4mm solid #78b900}
-  .ls-logo img{width:42mm;height:17mm;filter:brightness(0) saturate(100%)}
+  .ls-logo img{width:42mm;height:17mm}
   .ls-logo p{font-size:8px;color:#58615c;margin-top:2mm}
   .paper-title{background:linear-gradient(135deg,#273b31,#3f614e);color:#fff;padding:7mm 8mm;text-align:left;position:relative}
   .paper-title:after{content:'DOCUMENTO DE TRANSPORTE';position:absolute;right:7mm;top:5mm;font-size:6px;letter-spacing:1.2px;color:#bcd1c4}
@@ -49,7 +49,7 @@
   .print-sheet{font-size:8px}
   .paper-head{height:34mm;border-radius:2mm;grid-template-columns:34% 66%}
   .ls-logo{padding:3mm 5mm 2mm;border-left-width:2.5mm}
-  .ls-logo img{width:30mm;height:12mm;filter:brightness(0) saturate(100%)}
+  .ls-logo img{width:30mm;height:12mm}
   .ls-logo p{font-size:6.5px;line-height:1.2;margin-top:1mm}
   .paper-title{padding:4.5mm 6mm}
   .paper-title:after{right:5mm;top:3mm;font-size:5px}
