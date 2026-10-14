@@ -191,7 +191,7 @@ function buildPrintSheet(){
   const rows=d.lines.map(x=>`<tr><td>${esc(x.boxes)}</td><td>${esc(x.pallets)}</td><td>${esc(x.reference)}</td><td class="desc">${esc(x.description)}</td><td>${x.qty||''}</td><td>${esc(x.weight)}</td></tr>`).join('');
   $('#printSheet').innerHTML=`
     <div class="paper-head">
-      <div class="ls-logo"><img src="luis-simoes-logo-white.svg" alt="Luis Simões"><p>Avda. del transporte 9<br>19004 Guadalajara</p></div>
+      <div class="ls-logo"><img src="luis-simoes-logo.png" alt="Luis Simões"><p>Avda. del transporte 9<br>19004 Guadalajara</p></div>
       <div class="paper-title"><h1>${esc(title)}</h1><b>ALBARÁN DE RECOGIDA</b><div><span>ALBARÁN N.º: <strong>${esc(d.docNumber)}</strong></span><span>FECHA: <strong>${fmtDate(d.docDate)}</strong></span></div></div>
     </div>
     <div class="paper-reference">REFERENCIA / PEDIDO: <strong>${esc(d.reference)}</strong></div>
