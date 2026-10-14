@@ -18,15 +18,15 @@
 @media(max-width:700px){.welcome-copy{align-items:flex-start;flex-direction:column;gap:14px}.home-ls-logo{width:145px;height:62px;padding:0;border:0}}
 @media print{
   .print-sheet{padding:0;color:#26312c!important}
-  .paper-head{height:42mm;border:0;border-radius:3mm;overflow:hidden;display:grid;grid-template-columns:38% 62%;background:#f4f8f2;box-shadow:inset 0 0 0 1px #d9e2d6}
-  .ls-logo{padding:7mm 7mm 4mm;background:#fff;border-left:4mm solid #78b900}
+  .paper-head{height:42mm;border:0;border-radius:3mm;overflow:hidden;display:grid;grid-template-columns:38% 62%;background:#fff;box-shadow:inset 0 0 0 1px #bdc7c0}
+  .ls-logo{padding:7mm 7mm 4mm;background:#fff;border-left:4mm solid #69b900}
   .ls-logo img{width:42mm;height:17mm}
-  .ls-logo p{font-size:8px;color:#58615c;margin-top:2mm}
-  .paper-title{background:linear-gradient(135deg,#273b31,#3f614e);color:#fff;padding:7mm 8mm;text-align:left;position:relative}
-  .paper-title:after{content:'DOCUMENTO DE TRANSPORTE';position:absolute;right:7mm;top:5mm;font-size:6px;letter-spacing:1.2px;color:#bcd1c4}
-  .paper-title h1{font-size:25px;letter-spacing:.8px;margin:0 0 3mm;color:#fff}
-  .paper-title>b{font-size:10px;letter-spacing:1px;color:#b9dc61}
-  .paper-title>div{justify-content:flex-start;gap:12mm;margin-top:5mm;font-size:8px}.paper-title strong{color:#fff;font-size:10px}
+  .ls-logo p{font-size:8px;color:#17211c;font-weight:600;margin-top:2mm}
+  .paper-title{background:linear-gradient(135deg,#101714,#1c2922);color:#fff;padding:7mm 8mm;text-align:left;position:relative;border-left:1mm solid #69b900}
+  .paper-title:after{content:'DOCUMENTO DE TRANSPORTE';position:absolute;right:7mm;top:5mm;font-size:6px;letter-spacing:1.3px;color:#eef4ef}
+  .paper-title h1{font-size:26px;letter-spacing:1px;margin:0 0 3mm;color:#fff;font-weight:800}
+  .paper-title>b{font-size:10px;letter-spacing:1.1px;color:#b4ea46;font-weight:800}
+  .paper-title>div{justify-content:flex-start;gap:12mm;margin-top:5mm;font-size:8px;color:#e9f0eb}.paper-title strong{color:#fff;font-size:10px;font-weight:800}
   .paper-reference{width:100%;border:0;border-left:3px solid #78b900;background:#f1f5ef;padding:3mm 4mm;margin:5mm 0 4mm;border-radius:0 2mm 2mm 0;color:#66716b}
   .paper-reference strong{color:#26312c}
   .paper-boxes{grid-template-columns:1fr 1fr;gap:5mm}
