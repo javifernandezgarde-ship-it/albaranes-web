@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Albaranes · Panel de gestión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><img class="sidebar-logo" src="luis-simoes-logo-white.svg" alt="Luis Simões"><span id="sideBrand" class="visually-hidden">BUFALO</span></div>
+    <nav>
+      <button class="nav-item active" data-view="home"><span>⌂</span><small>Inicio</small></button>
+      <button class="nav-item" data-view="editor"><span>＋</span><small>Nuevo<br>albarán</small></button>
+      <button class="nav-item" data-view="history"><span>▤</span><small>Historial</small></button>
+      <button class="nav-item" data-view="settings"><span>⚙</span><small>Empresa</small></button>
+    </nav>
+    <div class="sidebar-foot">v1.0</div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div><button id="menuBtn" class="icon-btn menu-btn">☰</button><h1 id="pageTitle">Página de inicio</h1></div>
+      <div class="user"><span class="user-dot">JF</span><span>Usuario administrador</span></div>
+    </header>
+
+    <section id="home" class="view active-view content">
+      <div class="welcome">
+        <div><span class="eyebrow">GESTIÓN DOCUMENTAL</span><h2>Buenos días</h2><p>Crea, consulta e imprime los albaranes de tu empresa.</p></div>
+        <button class="primary" data-go="editor">＋ Crear albarán</button>
+      </div>
+      <section class="panel">
+        <div class="panel-title"><h3>Albaranes</h3><span>⌄</span></div>
+        <div class="cards">
+          <button class="card" data-go="editor"><div><strong>NUEVO ALBARÁN</strong><p>Crear un documento manual</p></div><span class="card-icon">＋</span></button>
+          <button class="card" data-go="history"><div><strong>HISTORIAL</strong><p>Consultar albaranes guardados</p></div><span class="card-icon">▤</span></button>
+          <button class="card" id="quickPrint"><div><strong>ÚLTIMO ALBARÁN</strong><p>Ver e imprimir de nuevo</p></div><span class="card-icon">↗</span></button>
+        </div>
+      </section>
+      <section class="panel summary-panel">
+        <div class="panel-title"><h3>Resumen</h3><span>⌄</span></div>
+        <div class="stats"><div><span>Total guardados</span><b id="totalDocs">0</b></div><div><span>Pendientes</span><b id="pendingDocs">0</b></div><div><span>Entregados</span><b id="deliveredDocs">0</b></div></div>
+      </section>
+    </section>
+
+    <section id="editor" class="view content">
+      <div class="section-head"><div><span class="eyebrow">NUEVO DOCUMENTO</span><h2>Crear albarán</h2><p>Completa los datos y añade los productos entregados.</p></div><div class="actions"><button class="secondary" id="clearBtn">Limpiar</button><button class="primary" id="saveBtn">Guardar albarán</button></div></div>
+      <form id="deliveryForm">
+        <section class="form-card account-card">
+          <div><span class="eyebrow">CUENTA / MARCA DEL ALBARÁN</span><h3>Nombre que aparecerá en la cabecera</h3><p>Selecciona la cuenta correspondiente a este documento.</p></div>
+          <div class="account-picker"><select id="documentClient"><option>BACARDI</option><option selected>BUFALO</option><option>COMET</option><option>ESSITY</option><option>DIAGEO</option><option>AFFINITY</option><option>CASA REDONDO</option><option>DUVEL</option><option>DIAGEO POS</option><option>MCCORMICK</option><option>FELIX SOLIS</option><option>ZADIBE</option></select><span>Se mostrará como título en el PDF</span></div>
+        </section>
+        <section class="form-card">
+          <h3>Datos del documento</h3>
+          <div class="form-grid four">
+            <label>N.º de albarán<input id="docNumber" required></label>
+            <label>Fecha<input id="docDate" type="date" required></label>
+            <label>Estado<select id="docStatus"><option>Pendiente</option><option>Entregado</option><option>Cancelado</option></select></label>
+            <label>Pedido / referencia<input id="reference" placeholder="Opcional"></label>
+          </div>
+        </section>
+        <div class="two-cols">
+          <section class="form-card"><h3>Local de carga</h3><p style="font-size:12px;margin:-13px 0 18px">Busca por código y se completarán los datos del local de carga.</p><div class="form-grid"><label>Cód. dest. cliente<input id="loadingDestinationCode" list="destinationCodes" placeholder="Ej. 650671" autocomplete="off"></label><label>Nombre destino<input id="companyName" required placeholder="Nombre del local de carga"></label><label>Código postal<input id="companyPostalCode" placeholder="Código postal"></label><label>Ciudad / localidad<input id="companyCity" placeholder="Población / provincia"></label><label class="wide">Dirección<input id="companyAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="companyPhone"></label><label>Email<input id="companyEmail" type="email"></label></div></section>
+          <section class="form-card"><h3>Local de descarga</h3><p style="font-size:12px;margin:-13px 0 18px">Para albaranes de BUFALO, busca por código o por nombre y se completarán los datos de entrega.</p><div class="form-grid"><label>Cód. dest. cliente<input id="destinationCode" list="destinationCodes" placeholder="Ej. 650671" autocomplete="off"><datalist id="destinationCodes"></datalist></label><label>Nombre destino<input id="clientName" list="destinationNames" required placeholder="Escribe para buscar" autocomplete="off"><datalist id="destinationNames"></datalist></label><label>Código postal<input id="clientPostalCode" placeholder="Código postal"></label><label>Ciudad / localidad<input id="clientCity" placeholder="Población / provincia"></label><label class="wide">Dirección de entrega<input id="clientAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="clientPhone"></label><label>Email<input id="clientEmail" type="email"></label></div></section>
+        </div>
+        <section class="form-card lines-card">
+          <div class="card-heading"><h3>Líneas del albarán</h3><button type="button" class="secondary green" id="addLine">＋ Añadir línea</button></div>
+          <div class="quick-entry">
+            <div class="quick-title"><div><b>Entrada rápida</b><span>Escribe los datos y pulsa Enter para continuar</span></div><button type="button" class="excel-import-button" id="pasteToggle">▦ Importar tabla de Excel</button></div>
+            <div class="quick-grid">
+              <label>Referencia<input id="quickRef" list="productRefs" placeholder="Escanea o escribe código" autocomplete="off"><datalist id="productRefs"></datalist></label>
+              <label>Descripción<input id="quickDesc" placeholder="Descripción del producto"></label>
+              <label>Cantidad<input id="quickQty" type="number" min="0" step="0.01" value="1"></label>
+              <label>Tipo<select id="quickType"><option value="units">Unidades</option><option value="boxes">Cajas</option><option value="pallets">Palés</option></select></label>
+              <button type="button" class="quick-add" id="quickAdd">Añadir ↵</button>
+            </div>
+            <div class="paste-panel" id="pastePanel"><div class="excel-help"><b>Importación automática desde tu hoja</b><span>1. Copia las columnas que necesites incluyendo la fila de encabezados.</span><span>2. Puedes colocarlas en cualquier orden y añadir columnas que no se utilizarán.</span><span>3. Pega con Ctrl+V: el sistema localizará cada dato por el nombre de su columna.</span></div><textarea id="bulkPaste" rows="7" placeholder="Desc. Artigo    Uds    Cod. Artigo    Nº Paletes    Peso    Nº Volumes"></textarea><div><button type="button" class="secondary" id="cancelPaste">Cancelar</button><button type="button" class="primary" id="importPaste">Detectar e importar</button></div></div>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Descripción</th><th>Referencia</th><th>Cantidad</th><th>Unidad</th><th></th></tr></thead><tbody id="lineItems"></tbody></table></div>
+          <div class="line-total">Total unidades: <strong id="totalQty">0</strong></div>
+        </section>
+        <section class="form-card"><h3>Observaciones</h3><textarea id="notes" rows="4" placeholder="Indicaciones de entrega, estado de la mercancía, transportista..."></textarea></section>
+        <div class="bottom-actions"><button type="button" class="pdf-button" id="previewBtn">↓ Exportar en PDF</button><button class="primary" type="submit">Guardar albarán</button></div>
+      </form>
+    </section>
+
+    <section id="history" class="view content">
+      <div class="section-head"><div><span class="eyebrow">DOCUMENTOS</span><h2>Historial de albaranes</h2><p>Los datos se guardan en este navegador.</p></div><button class="primary" data-go="editor">＋ Nuevo albarán</button></div>
+      <section class="form-card"><div class="retention-note"><span>⏱</span><div><b>Conservación automática: 15 días</b><p>Los albaranes se eliminan automáticamente 15 días después de su creación.</p></div></div><div class="history-tools"><input id="searchNumber" placeholder="Número de albarán..."><input id="searchClient" placeholder="Cliente..."><label class="date-filter">Fecha de creación<input id="searchDate" type="date"></label><select id="statusFilter"><option value="">Todos los estados</option><option>Pendiente</option><option>Entregado</option><option>Cancelado</option></select><button type="button" class="secondary" id="clearFilters">Limpiar</button></div><div class="table-wrap"><table><thead><tr><th>Número</th><th>Creado</th><th>Cliente</th><th>Estado</th><th>Unidades</th><th></th></tr></thead><tbody id="historyRows"></tbody></table></div><div id="emptyHistory" class="empty">No hay albaranes que coincidan con la búsqueda.</div></section>
+    </section>
+
+    <section id="settings" class="view content">
+      <div class="section-head"><div><span class="eyebrow">CONFIGURACIÓN</span><h2>Datos de empresa</h2><p>Se cargarán automáticamente en cada albarán nuevo.</p></div></div>
+      <section class="form-card settings-card"><div class="form-grid"><label>Razón social<input id="setCompanyName"></label><label>Localidad<input id="setCompanyCity" placeholder="Población / provincia"></label><label class="wide">Dirección<input id="setCompanyAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="setCompanyPhone"></label><label>Email<input id="setCompanyEmail"></label></div><button id="saveCompany" class="primary">Guardar datos</button></section>
+    </section>
+  </main>
+
+  <input type="hidden" id="activeClient" value="BUFALO"><select id="clientOptions" hidden></select>
+
+  <section id="printSheet" class="print-sheet" aria-hidden="true"></section>
+
+  <div id="toast" class="toast"></div>
+  <script src="destinos-bufalo.js"></script>
+  <script src="destinos-bacardi.js"></script>
+  <script src="destinos-zamora.js?v=zadibe-1"></script>
+  <script src="destinos-diageo.js?v=diageo-1"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
