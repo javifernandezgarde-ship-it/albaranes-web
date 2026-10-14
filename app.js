@@ -32,12 +32,14 @@ const bufaloDestinations=Array.isArray(window.BUFALO_DESTINATIONS)?window.BUFALO
 const bacardiDestinations=Array.isArray(window.BACARDI_DESTINATIONS)?window.BACARDI_DESTINATIONS:[];
 const zamoraDestinations=Array.isArray(window.ZAMORA_DESTINATIONS)?window.ZAMORA_DESTINATIONS:[];
 const diageoDestinations=Array.isArray(window.DIAGEO_DESTINATIONS)?window.DIAGEO_DESTINATIONS:[];
+const estrellaGaliciaDestinations=Array.isArray(window.ESTRELLA_GALICIA_DESTINATIONS)?window.ESTRELLA_GALICIA_DESTINATIONS:[];
 function activeDestinations(){
   const client=$('#documentClient').value;
   if(client==='BACARDI')return bacardiDestinations;
   if(client==='BUFALO')return bufaloDestinations;
   if(client==='ZADIBE')return zamoraDestinations;
   if(client==='DIAGEO')return diageoDestinations;
+  if(client==='ESTRELLA GALICIA')return estrellaGaliciaDestinations;
   return [];
 }
 const destinationKey=value=>String(value||'').trim().toLocaleLowerCase('es-ES');
@@ -141,7 +143,7 @@ document.addEventListener('keydown',e=>{
   if(e.ctrlKey&&e.key==='Enter'&&$('#editor').classList.contains('active-view')){e.preventDefault();save()}
 });
 function readForm(){const original=editingId?docs().find(x=>x.id===editingId):null;const d={id:editingId||crypto.randomUUID(),createdAt:original?.createdAt||new Date().toISOString(),documentClient:$('#documentClient').value.trim().toUpperCase()};fields.forEach(f=>d[f]=$('#'+f).value.trim());d.lines=$$('#lineItems tr').map(r=>({description:r.querySelector('.l-desc').value.trim(),reference:r.querySelector('.l-ref').value.trim(),qty:r.querySelector('.l-qty').value===''?'':+r.querySelector('.l-qty').value,unit:r.querySelector('.l-unit').value,boxes:r.querySelector('.l-boxes').value,pallets:r.querySelector('.l-pallets').value,weight:r.querySelector('.l-weight').value})).filter(x=>x.reference||x.description);return d}
-function resetForm(){editingId=null;$('#deliveryForm').reset();fields.forEach(f=>$('#'+f).value='');$('#docDate').value=new Date().toISOString().slice(0,10);$('#docStatus').value='Pendiente';$('#docNumber').value=nextNumber();const saved=localStorage.getItem(ACTIVE_CLIENT);$('#documentClient').value=['BACARDI','BUFALO','COMET','ESSITY','DIAGEO','AFFINITY','CASA REDONDO','DUVEL','DIAGEO POS','MCCORMICK','FELIX SOLIS','ZADIBE'].includes(saved)?saved:'BUFALO';loadCompanyIntoForm();$('#lineItems').innerHTML='';addLine()}
+function resetForm(){editingId=null;$('#deliveryForm').reset();fields.forEach(f=>$('#'+f).value='');$('#docDate').value=new Date().toISOString().slice(0,10);$('#docStatus').value='Pendiente';$('#docNumber').value=nextNumber();const saved=localStorage.getItem(ACTIVE_CLIENT);$('#documentClient').value=['BACARDI','BUFALO','COMET','ESSITY','DIAGEO','AFFINITY','CASA REDONDO','DUVEL','DIAGEO POS','MCCORMICK','FELIX SOLIS','ZADIBE','ESTRELLA GALICIA'].includes(saved)?saved:'BUFALO';loadCompanyIntoForm();$('#lineItems').innerHTML='';addLine()}
 function save(){if(!$('#deliveryForm').reportValidity())return;const d=readForm();if(!d.lines.length){toast('Añade al menos una línea');return}const all=docs(),i=all.findIndex(x=>x.id===d.id);if(i>=0)all[i]=d;else all.unshift(d);localStorage.setItem(STORE,JSON.stringify(all));refreshProductRefs();editingId=null;toast('Albarán guardado correctamente');renderStats();go('history')}
 function exportPdf(){
   buildPrintSheet();
@@ -165,7 +167,7 @@ $('#saveCompany').onclick=()=>{const c={};companyFields.forEach(f=>c[f.toLowerCa
 const removedOnStart=purgeExpiredDocs();loadSettings();resetForm();renderStats();refreshProductRefs();refreshDestinationLists();if(removedOnStart)setTimeout(()=>toast(`${removedOnStart} albarán(es) caducado(s) eliminado(s)`),300);
 
 function setActiveClient(value,syncForm=true){
-  const allowed=['BACARDI','BUFALO','COMET','ESSITY','DIAGEO','AFFINITY','CASA REDONDO','DUVEL','DIAGEO POS','MCCORMICK','FELIX SOLIS','ZADIBE'];
+  const allowed=['BACARDI','BUFALO','COMET','ESSITY','DIAGEO','AFFINITY','CASA REDONDO','DUVEL','DIAGEO POS','MCCORMICK','FELIX SOLIS','ZADIBE','ESTRELLA GALICIA'];
   const requested=(value||'').trim().toUpperCase();
   const name=allowed.includes(requested)?requested:'BUFALO';
   $('#activeClient').value=name;
@@ -191,7 +193,7 @@ function buildPrintSheet(){
   const rows=d.lines.map(x=>`<tr><td>${esc(x.boxes)}</td><td>${esc(x.pallets)}</td><td>${esc(x.reference)}</td><td class="desc">${esc(x.description)}</td><td>${x.qty||''}</td><td>${esc(x.weight)}</td></tr>`).join('');
   $('#printSheet').innerHTML=`
     <div class="paper-head">
-      <div class="ls-logo"><img src="luis-simoes-logo-original.svg" alt="Luis Simões"><p>Avda. del transporte 9<br>19004 Guadalajara</p></div>
+      <div class="ls-logo"><img src="luis-simoes-logo.png" alt="Luis Simões"><p>Avda. del transporte 9<br>19004 Guadalajara</p></div>
       <div class="paper-title"><h1>${esc(title)}</h1><b>ALBARÁN DE RECOGIDA</b><div><span>ALBARÁN N.º: <strong>${esc(d.docNumber)}</strong></span><span>FECHA: <strong>${fmtDate(d.docDate)}</strong></span></div></div>
     </div>
     <div class="paper-reference">REFERENCIA / PEDIDO: <strong>${esc(d.reference)}</strong></div>
