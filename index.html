@@ -11,7 +11,7 @@
 </head>
 <body>
   <aside class="sidebar">
-    <div class="brand"><img class="sidebar-logo" src="luis-simoes-sidebar-original.svg" alt="Luis Simões"><span id="sideBrand" class="visually-hidden">BUFALO</span></div>
+    <div class="brand"><img class="sidebar-logo" src="luis-simoes-sidebar-hq.png" alt="Luis Simões"><span id="sideBrand" class="visually-hidden">BUFALO</span></div>
     <nav>
       <button class="nav-item active" data-view="home"><span>⌂</span><small>Inicio</small></button>
       <button class="nav-item" data-view="editor"><span>＋</span><small>Nuevo<br>albarán</small></button>
@@ -51,7 +51,7 @@
       <form id="deliveryForm">
         <section class="form-card account-card">
           <div><span class="eyebrow">CUENTA / MARCA DEL ALBARÁN</span><h3>Nombre que aparecerá en la cabecera</h3><p>Selecciona la cuenta correspondiente a este documento.</p></div>
-          <div class="account-picker"><select id="documentClient"><option>BACARDI</option><option selected>BUFALO</option><option>COMET</option><option>ESSITY</option><option>DIAGEO</option><option>AFFINITY</option><option>CASA REDONDO</option><option>DUVEL</option><option>DIAGEO POS</option><option>MCCORMICK</option><option>FELIX SOLIS</option><option>ZADIBE</option></select><span>Se mostrará como título en el PDF</span></div>
+          <div class="account-picker"><select id="documentClient"><option>BACARDI</option><option selected>BUFALO</option><option>COMET</option><option>ESSITY</option><option>DIAGEO</option><option>AFFINITY</option><option>CASA REDONDO</option><option>DUVEL</option><option>DIAGEO POS</option><option>MCCORMICK</option><option>FELIX SOLIS</option><option>ZADIBE</option><option>ESTRELLA GALICIA</option></select><span>Se mostrará como título en el PDF</span></div>
         </section>
         <section class="form-card">
           <h3>Datos del documento</h3>
@@ -64,7 +64,7 @@
         </section>
         <div class="two-cols">
           <section class="form-card"><h3>Local de carga</h3><p style="font-size:12px;margin:-13px 0 18px">Busca por código y se completarán los datos del local de carga.</p><div class="form-grid"><label>Cód. dest. cliente<input id="loadingDestinationCode" list="destinationCodes" placeholder="Ej. 650671" autocomplete="off"></label><label>Nombre destino<input id="companyName" required placeholder="Nombre del local de carga"></label><label>Código postal<input id="companyPostalCode" placeholder="Código postal"></label><label>Ciudad / localidad<input id="companyCity" placeholder="Población / provincia"></label><label class="wide">Dirección<input id="companyAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="companyPhone"></label><label>Email<input id="companyEmail" type="email"></label></div></section>
-          <section class="form-card"><h3>Local de descarga</h3><p style="font-size:12px;margin:-13px 0 18px">Para albaranes de BUFALO, busca por código o por nombre y se completarán los datos de entrega.</p><div class="form-grid"><label>Cód. dest. cliente<input id="destinationCode" list="destinationCodes" placeholder="Ej. 650671" autocomplete="off"><datalist id="destinationCodes"></datalist></label><label>Nombre destino<input id="clientName" list="destinationNames" required placeholder="Escribe para buscar" autocomplete="off"><datalist id="destinationNames"></datalist></label><label>Código postal<input id="clientPostalCode" placeholder="Código postal"></label><label>Ciudad / localidad<input id="clientCity" placeholder="Población / provincia"></label><label class="wide">Dirección de entrega<input id="clientAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="clientPhone"></label><label>Email<input id="clientEmail" type="email"></label></div></section>
+          <section class="form-card"><h3>Local de descarga</h3><p style="font-size:12px;margin:-13px 0 18px">Busca por código o por nombre y se completarán los datos de entrega del cliente seleccionado.</p><div class="form-grid"><label>Cód. dest. cliente<input id="destinationCode" list="destinationCodes" placeholder="Ej. 650671" autocomplete="off"><datalist id="destinationCodes"></datalist></label><label>Nombre destino<input id="clientName" list="destinationNames" required placeholder="Escribe para buscar" autocomplete="off"><datalist id="destinationNames"></datalist></label><label>Código postal<input id="clientPostalCode" placeholder="Código postal"></label><label>Ciudad / localidad<input id="clientCity" placeholder="Población / provincia"></label><label class="wide">Dirección de entrega<input id="clientAddress" placeholder="Calle, número, nave..."></label><label>Teléfono<input id="clientPhone"></label><label>Email<input id="clientEmail" type="email"></label></div></section>
         </div>
         <section class="form-card lines-card">
           <div class="card-heading"><h3>Líneas del albarán</h3><button type="button" class="secondary green" id="addLine">＋ Añadir línea</button></div>
@@ -107,6 +107,7 @@
   <script src="destinos-bacardi.js"></script>
   <script src="destinos-zamora.js?v=zadibe-1"></script>
   <script src="destinos-diageo.js?v=diageo-1"></script>
+  <script src="destinos-estrella-galicia.js?v=estrella-galicia-1"></script>
   <script src="app.js"></script>
 </body>
 </html>
