@@ -55,8 +55,17 @@ const server = http.createServer(async (req, res) => {
   send(res, 200, types[path.extname(file)] || 'application/octet-stream', fs.readFileSync(file), { 'Cache-Control': 'no-store' });
 });
 
-if (!fs.existsSync(usersFile)) {
-  if (!process.env.ADMIN_PASSWORD) console.warn('Define ADMIN_PASSWORD antes de arrancar para crear el primer usuario.');
-  else { const users = {}; for (const email of allowedEmails) users[email] = { passwordHash: hash(process.env.ADMIN_PASSWORD), createdAt: new Date().toISOString() }; saveUsers(users); }
+// Sincroniza los usuarios autorizados al arrancar. Esto evita que una primera
+// ejecución sin variables de entorno deje un users.json vacío en Render.
+if (!process.env.ADMIN_PASSWORD) {
+  console.warn('Define ADMIN_PASSWORD antes de arrancar para crear usuarios.');
+} else {
+  const users = readUsers();
+  for (const email of allowedEmails) {
+    if (!users[email] || !check(process.env.ADMIN_PASSWORD, users[email].passwordHash)) {
+      users[email] = { passwordHash: hash(process.env.ADMIN_PASSWORD), updatedAt: new Date().toISOString() };
+    }
+  }
+  saveUsers(users);
 }
 server.listen(port, () => console.log(`Albaranes seguro en http://localhost:${port}`));
