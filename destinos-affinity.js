@@ -1,0 +1,2 @@
+window.AFFINITY_DESTINATIONS = [];
+
