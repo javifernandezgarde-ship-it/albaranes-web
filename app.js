@@ -39,6 +39,7 @@ const felixSolisDestinations=Array.isArray(window.FELIX_SOLIS_DESTINATIONS)?wind
 const casaRedondoDestinations=Array.isArray(window.CASA_REDONDO_DESTINATIONS)?window.CASA_REDONDO_DESTINATIONS:[];
 const diageoPosDestinations=Array.isArray(window.DIAGEO_POS_DESTINATIONS)?window.DIAGEO_POS_DESTINATIONS:[];
 const affinityDestinations=Array.isArray(window.AFFINITY_DESTINATIONS)?window.AFFINITY_DESTINATIONS:[];
+const duvelDestinations=Array.isArray(window.DUVEL_DESTINATIONS)?window.DUVEL_DESTINATIONS:[];
 function activeDestinations(){
   const client=$('#documentClient').value;
   if(client==='BACARDI')return bacardiDestinations;
@@ -52,6 +53,7 @@ function activeDestinations(){
   if(client==='CASA REDONDO')return casaRedondoDestinations;
   if(client==='DIAGEO POS')return diageoPosDestinations;
   if(client==='AFFINITY')return affinityDestinations;
+  if(client==='DUVEL')return duvelDestinations;
   return [];
 }
 const destinationKey=value=>String(value||'').trim().toLocaleLowerCase('es-ES');
