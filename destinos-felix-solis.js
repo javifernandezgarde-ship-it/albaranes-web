@@ -1,0 +1,2 @@
+window.FELIX_SOLIS_DESTINATIONS = [];
+
