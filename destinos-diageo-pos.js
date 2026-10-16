@@ -1,0 +1,2 @@
+window.DIAGEO_POS_DESTINATIONS = [];
+
