@@ -1,0 +1,2 @@
+window.ESSITY_DESTINATIONS = [];
+
