@@ -35,6 +35,7 @@ const diageoDestinations=Array.isArray(window.DIAGEO_DESTINATIONS)?window.DIAGEO
 const estrellaGaliciaDestinations=Array.isArray(window.ESTRELLA_GALICIA_DESTINATIONS)?window.ESTRELLA_GALICIA_DESTINATIONS:[];
 const mccormickDestinations=Array.isArray(window.MCCORMICK_DESTINATIONS)?window.MCCORMICK_DESTINATIONS:[];
 const essityDestinations=Array.isArray(window.ESSITY_DESTINATIONS)?window.ESSITY_DESTINATIONS:[];
+const felixSolisDestinations=Array.isArray(window.FELIX_SOLIS_DESTINATIONS)?window.FELIX_SOLIS_DESTINATIONS:[];
 function activeDestinations(){
   const client=$('#documentClient').value;
   if(client==='BACARDI')return bacardiDestinations;
@@ -44,6 +45,7 @@ function activeDestinations(){
   if(client==='ESTRELLA GALICIA')return estrellaGaliciaDestinations;
   if(client==='MCCORMICK')return mccormickDestinations;
   if(client==='ESSITY')return essityDestinations;
+  if(client==='FELIX SOLIS')return felixSolisDestinations;
   return [];
 }
 const destinationKey=value=>String(value||'').trim().toLocaleLowerCase('es-ES');
