@@ -25,12 +25,14 @@ function readUsers() {
   try { return JSON.parse(fs.readFileSync(usersFile, 'utf8')); } catch { return {}; }
 }
 function saveUsers(users) { fs.writeFileSync(usersFile, JSON.stringify(users, null, 2)); }
-function token(email) { return `${email}.${crypto.createHmac('sha256', sessionSecret).update(email).digest('hex')}`; }
+function token(email) { return `${email}|${crypto.createHmac('sha256', sessionSecret).update(email).digest('hex')}`; }
 function validSession(req) {
   const raw = req.headers.cookie?.match(/(?:^|; )session=([^;]+)/)?.[1];
   if (!raw) return null;
-  const [email, sig] = decodeURIComponent(raw).split('.');
-  return email && sig === token(email).split('.')[1] && allowedEmails.includes(email) ? email : null;
+  const separator = decodeURIComponent(raw).lastIndexOf('|');
+  const email = separator > 0 ? decodeURIComponent(raw).slice(0, separator) : '';
+  const sig = separator > 0 ? decodeURIComponent(raw).slice(separator + 1) : '';
+  return email && sig === token(email).split('|')[1] && allowedEmails.includes(email) ? email : null;
 }
 function send(res, status, type, body, headers = {}) { res.writeHead(status, { 'Content-Type': type, ...headers }); res.end(body); }
 const login = `<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acceso · Albaranes</title><style>body{font-family:Arial,sans-serif;background:#f3f5f8;display:grid;place-items:center;min-height:100vh;margin:0}.card{background:#fff;padding:32px;border-radius:14px;box-shadow:0 8px 30px #0002;width:min(390px,calc(100% - 40px))}h1{margin-top:0;color:#111}label{display:block;margin:14px 0 6px;font-weight:bold}input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #bbb;border-radius:8px;font-size:16px}button{margin-top:20px;width:100%;padding:12px;border:0;border-radius:8px;background:#111;color:#fff;font-size:16px;cursor:pointer}.error{color:#b00020;margin-top:14px}</style><div class="card"><h1>Albaranes</h1><p>Acceso para personal autorizado</p><form method="post" action="/login"><label>Correo autorizado</label><input name="email" type="email" required><label>Contraseña</label><input name="password" type="password" required><button>Entrar</button></form><div class="error" id="error"></div></div></html>`;
