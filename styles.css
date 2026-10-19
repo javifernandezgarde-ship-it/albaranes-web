@@ -83,5 +83,8 @@
   .paper-notes b{font-size:6.5px}
   .paper-signatures{gap:5mm;margin-top:2.5mm}
   .paper-signatures div{min-height:13mm;padding:2mm;font-size:6.5px}
+  .driver-signatures{grid-template-columns:1fr 1.5fr;gap:18mm;margin-top:5mm}
+  .driver-signatures div{min-height:24mm;border:1px solid #111!important;border-radius:0!important;padding:3mm;font-size:8px;line-height:1.15;background:#fff!important;color:#000!important}
+  .driver-signatures div:last-child{text-align:center;padding-top:4mm}
 }
 
