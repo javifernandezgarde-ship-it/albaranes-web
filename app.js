@@ -217,6 +217,6 @@ function buildPrintSheet(){
     </div>
     <table class="paper-table"><thead><tr><th colspan="2">CANTIDAD</th><th>CÓDIGO</th><th>DESCRIPCIÓN</th><th>UDS</th><th>PESO</th></tr><tr><th>CAJAS</th><th>PALÉS</th><th></th><th></th><th></th><th></th></tr></thead><tbody>${rows}</tbody></table>
     <div class="paper-notes"><b>OBSERVACIONES:</b><br>${esc(d.notes)}</div>
-    <div class="paper-signatures"><div>ENTREGADO POR:<br><br><br>Firma</div><div>RECIBIDO POR:<br><br><br>Firma y sello</div></div>`;
+    <div class="paper-signatures driver-signatures"><div><span>NOMBRE CONDUCTOR:</span><br><br><span>DNI</span><br><br><span>FIRMA</span></div><div><span>FECHA:________ / ________ / ________</span><br><br><br><span>HORA: __________ : __________</span></div></div>`;
 }
 
