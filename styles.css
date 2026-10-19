@@ -46,7 +46,16 @@
 }
 @media print{
   @page{size:A4 portrait;margin:5mm}
-  .print-sheet{font-size:8px}
+  .print-sheet{font-size:8px;color:#000!important}
+  .print-sheet *{color:#000!important;text-shadow:none!important}
+  .paper-head,.paper-box,.paper-reference,.paper-notes,.paper-signatures div{border-color:#111!important;box-shadow:none!important}
+  .paper-title{background:#222!important;color:#fff!important}
+  .paper-title *{color:#fff!important}
+  .paper-table{border-color:#111!important}
+  .paper-table th,.paper-table td{border-color:#111!important;color:#000!important}
+  .paper-table th{background:#d0d0d0!important}
+  .box-label,.box-content,.box-footer{color:#000!important;border-color:#111!important;background:#fff!important}
+  .stars,.star,.rating,.rating-stars,.decorative-stars{display:none!important}
   .paper-head{height:34mm;border-radius:2mm;grid-template-columns:34% 66%}
   .ls-logo{padding:3mm 5mm 2mm;border-left-width:2.5mm}
   .ls-logo img{width:30mm;height:12mm}
