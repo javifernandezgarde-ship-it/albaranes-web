@@ -49,8 +49,10 @@
   .print-sheet{font-size:8px;color:#000!important}
   .print-sheet *{color:#000!important;text-shadow:none!important}
   .paper-head,.paper-box,.paper-reference,.paper-notes,.paper-signatures div{border-color:#111!important;box-shadow:none!important}
-  .paper-title{background:#222!important;color:#fff!important}
+  .paper-title{background:#2f663d!important;color:#fff!important}
   .paper-title *{color:#fff!important}
+  .paper-title>b{color:#d8f36a!important}
+  .paper-head{border-left:4px solid #69b900!important}
   .paper-table{border-color:#111!important}
   .paper-table th,.paper-table td{border-color:#111!important;color:#000!important}
   .paper-table th{background:#d0d0d0!important}
